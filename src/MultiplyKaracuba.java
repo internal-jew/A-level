@@ -34,7 +34,7 @@ public class MultiplyKaracuba {
         c = Long.valueOf(String.valueOf(second).substring(0, (String.valueOf(second).length() / 2) + addOneForOdd));
         d = Long.valueOf(String.valueOf(second).substring((String.valueOf(second).length() / 2) + addOneForOdd));
 
-
+// Recursive method
         return multiply(a, c) * countOfZero(first) / (addOneForOdd==1?10:1) + ((multiply((a + b), (c + d))) - (multiply(a, c)) - multiply(b, d)) * countOfZero(b) + multiply(b, d);
 //(addOneForOdd==1?10:1) this means that for odd number we devide by 10 otherwise we do nothing (devide by 1)
 
