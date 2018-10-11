@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-public class MultiplyByColums {
+public class MultiplyByColumns {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("----Multiplication by colums----");
+        System.out.println("----Multiplication by columns----");
         System.out.println("Enter first number");
         long first = scanner.nextInt();
         System.out.println("Enter second number");
