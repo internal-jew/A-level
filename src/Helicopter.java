@@ -7,7 +7,10 @@ public class Helicopter extends AirTransport {
         super(model,productionYear,0,0,0);
     }
 
-
+public void move(){
+        fly();
+        landing();
+}
 
 
     @Override

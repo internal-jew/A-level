@@ -8,6 +8,10 @@ public class Aircraft extends AirTransport {
 
     }
 
+    public void move() {
+        fly();
+    }
+
     @Override
     public void fly() {
         startEngine();
