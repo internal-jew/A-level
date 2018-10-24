@@ -1,6 +1,7 @@
 public class CookFish extends DishFactory {
     @Override
     public Dish makeDish() {
-        return new MarinadeFish();
+        MarinadeFish marinadeFish=new MarinadeFish();
+        return marinadeFish.createDish();
     }
 }

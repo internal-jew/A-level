@@ -1,3 +1,3 @@
-public abstract interface Dish {
+public interface Dish {
     Dish createDish();
 }
