@@ -1,12 +1,9 @@
-public class SeafoodSoup implements Dish {
+public class SeafoodSoup extends Dish {
 
-    SeafoodSoup() {
+  /*  SeafoodSoup() {
+
         System.out.println("Constructor of SeafoodSoup");
-    }
+    }*/
 
-    @Override
-    public Dish createDish() {
 
-        return new SeafoodSoup();
-    }
 }

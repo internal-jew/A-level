@@ -1,13 +1,11 @@
-public class MarinadeFish implements Dish {
-
-    MarinadeFish() {
-        System.out.println("Constructor of MarinadeFish");
-    }
+public class MarinadeFish extends Dish {
 
 
-    @Override
+
+
+  /*  @Override
     public Dish createDish() {
 
         return new MarinadeFish();
-    }
+    }*/
 }
