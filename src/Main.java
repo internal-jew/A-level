@@ -1,21 +1,14 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-      DishFactory cookSoup= new CookSoup();
-      DishFactory cookFish=new CookFish();
+        ArrayList<Dish> cookedDishes;
 
-    //  DishBuilder seafoodSoupBuilder=new SeafoodSoupBuilder();
-      // DishBuilder marinadeFishBuider=new MarinadeFishBuilder();
-      // DirectorOfDishBuilders directorOfDishBuilders=new DirectorOfDishBuilders(seafoodSoupBuilder);
+        OrderBuilder waiter = new DishOrderBuilder();
+        Order order = waiter.getOrder();
 
-
-     // directorOfDishBuilders.makeDish();
-
-      cookFish.makeDish();
-      //directorOfDishBuilders.changeBuilder(marinadeFishBuider);
-      cookSoup.makeDish();
-
-
-
-
+        DirectorOfDishFactory chiefCook = new DirectorOfDishFactory();
+        cookedDishes = chiefCook.getCookedDishes(order);
+        System.out.println("Enjoy your meal" + cookedDishes);
     }
 }

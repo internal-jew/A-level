@@ -1,16 +1,14 @@
-import java.util.ArrayList;
+abstract class DishBuilder {
+    Dish dish;
 
-public abstract class DishBuilder {
-
-
-
-Dish dish;
     abstract Dish getResult();
+
     abstract void prepareIngredients();
+
     void cookIngredientsToDish() {
-        for (Enum ingredient:dish.ingredients
+        for (Enum ingredient : dish.ingredients
         ) {
-            System.out.println("Cook "+ingredient);
+            System.out.println("Cook " + ingredient);
         }
     }
 }
