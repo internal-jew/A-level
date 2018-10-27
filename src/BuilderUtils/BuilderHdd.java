@@ -23,8 +23,14 @@ public class BuilderHdd implements Builder {
 
     @Override
     public void setManufactor(String manufactor) {
-      int a=  Integer.valueOf(manufactor); //third exception NumberFormatException
-        this.manufactor = manufactor;
+        try {
+            int a = Integer.valueOf(manufactor); //third exception NumberFormatException
+
+        } catch (NumberFormatException e) {
+            System.out.println("Manufactor is not Integer");
+        } finally {
+            this.manufactor = manufactor;
+        }
     }
 
     @Override
@@ -35,7 +41,6 @@ public class BuilderHdd implements Builder {
     @Override
     public void setSizeBuffer(Object sizeBuffer) {
 
-        this.sizeBuffer = (int)sizeBuffer;
     }
 
     @Override
@@ -45,6 +50,11 @@ public class BuilderHdd implements Builder {
 
     @Override
     public HardDrive getHDD() {
+        if (sizeBuffer != null && sizeBuffer.getClass() == Integer.class) {
+            this.sizeBuffer = (int) sizeBuffer;
+        } else {
+            this.sizeBuffer = 64;//default
+        }
         return new HardDrive(capacity, physicalParameters, manufactor, rpm, (int)sizeBuffer, typeHdd);
     }
 

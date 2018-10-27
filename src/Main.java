@@ -4,7 +4,7 @@ import BuilderUtils.HardDrive;
 import java.util.ArrayList;
 
 public class Main {
-//All exception in this code is unchecked, that is why we should not necessarily insert it in try-catch block.
+    //All exception in this code is unchecked, that is why we should not necessarily insert them in try-catch block.
     public static void main(String[] args) {
         ArrayList<HardDrive> hardDrivesArray = new ArrayList<>();
 
@@ -19,10 +19,16 @@ public class Main {
         hardDrivesArray.add(builderHdd.getHDD());
 
 
-     for (int i = 0; i <= hardDrivesArray.size(); i++) { //forth exception IndexOutOfBoundsException
+        //  for (int i = 0; i <= hardDrivesArray.size(); i++) { //forth exception IndexOutOfBoundsException
 
-          //  for (int i = 0; i < hardDrivesArray.size(); i++) {
-            System.out.println(hardDrivesArray.get(i));
+        // for (int i = 0; i < hardDrivesArray.size(); i++) {
+        //  System.out.println(hardDrivesArray.get(i));
+        // }
+
+        // Use foreach instead fori to avoid IndexOutOfBoundsException
+        for (HardDrive hdd : hardDrivesArray
+        ) {
+            System.out.println(hdd);
         }
 
     }
