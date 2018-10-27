@@ -10,7 +10,7 @@ class Director {
         builderHdd.setManufactor("Baracuda");
         builderHdd.setRpn(RpnHDD.RPN_HDD_7200);
         builderHdd.setSizeBuffer("wew"); // first exception ClassCastException
-     //   builderHdd.setSizeBuffer(64);
+        // builderHdd.setSizeBuffer(64);
         builderHdd.setType(TypeHdd.INTERNAL_DESKTOP);
     }
 
@@ -19,7 +19,7 @@ class Director {
         builderHdd.setPhysicalParameters(new PhysicalParameters(10.0, 5.0, 1.0));
         builderHdd.setManufactor("Baracuda");
         builderHdd.setRpn(RpnHDD.RPN_HDD_7200);
-        builderHdd.setSizeBuffer(64);
+        //  builderHdd.setSizeBuffer(64); //second exception NullPointerException
         builderHdd.setType(TypeHdd.EXTERNAL);
     }
 

@@ -34,8 +34,8 @@ public class BuilderHdd implements Builder {
 
     @Override
     public void setSizeBuffer(Object sizeBuffer) {
-     this.sizeBuffer = (int)sizeBuffer; //second exception NullPointerException
-      this.sizeBuffer = (int)sizeBuffer;
+
+        this.sizeBuffer = (int)sizeBuffer;
     }
 
     @Override
