@@ -1,7 +1,7 @@
 package hw_15;
 
 public class Fraction {
-
+//32423432432423
 
     int x;
     int y;
@@ -9,9 +9,9 @@ public class Fraction {
     public Fraction(int x, int y) {
         this.x = x;
         this.y = y;
-        if(y<0 && x>=0){
-            this.x*=-1;
-            this.y*=-1;
+        if (y < 0 && x >= 0) {
+            this.x *= -1;
+            this.y *= -1;
         }
     }
 
@@ -48,27 +48,27 @@ public class Fraction {
         int ten = (int) Math.pow(10.0, zeroes);
         return reduction(new Fraction((int) (fraction * ten), ten));
     */
-        String xStr=Double.toString(fraction);
-        for (int i = 0; i <xStr.length()-1 ; i++) {
-            if(xStr.charAt(i)=='.'){
+        String xStr = Double.toString(fraction);
+        for (int i = 0; i < xStr.length() - 1; i++) {
+            if (xStr.charAt(i) == '.') {
                 //  int x=Integer.valueOf(xStr.substring(0,i));
-                int zeroes = xStr.length() - i-1;
+                int zeroes = xStr.length() - i - 1;
                 int ten = (int) Math.pow(10.0, zeroes);
-                return reduction(new Fraction((int)(fraction*ten),1*ten));
+                return reduction(new Fraction((int) (fraction * ten), 1 * ten));
                 // int y=Integer.valueOf(xStr.substring(i+1));
             }
         }
-        return new Fraction(0,0);
+        return new Fraction(0, 0);
 
     }
 
     public static Fraction reduction(Fraction fraction) {
-        int j=Math.abs(fraction.x);
+        int j = Math.abs(fraction.x);
         for (int i = j; i > 1; i--) {
             if (fraction.x % i == 0 && fraction.y % i == 0) {
                 fraction.x /= i;
                 fraction.y /= i;
-                i=Math.abs(fraction.x);
+                i = Math.abs(fraction.x);
             }
 
 
