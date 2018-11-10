@@ -1,7 +1,6 @@
 package hw_15;
 
 public class Fraction {
-//32423432432423
 
     int x;
     int y;
