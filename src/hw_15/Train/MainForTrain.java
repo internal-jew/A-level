@@ -39,7 +39,7 @@ public class MainForTrain {
         return 0;
     }
 
-public static Enum<CityName> getRandomCityName() {
+    public static Enum<CityName> getRandomCityName() {
         Enum<CityName> newName = CityName.values()[random.nextInt(3)];
         while (newName == isUsedName) {
             newName = CityName.values()[random.nextInt(3)];
