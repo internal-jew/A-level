@@ -1,4 +1,4 @@
-package hw_16;
+/*package hw_16;
 
 import java.util.Random;
 
@@ -20,3 +20,4 @@ public class OwnObject {
         return new Random().nextInt();
     }
 }
+*/

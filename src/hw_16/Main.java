@@ -7,15 +7,20 @@ import java.util.List;
 
 public class Main {
 
-        public static void main(String[] args) {
-           List list = new MyOwnList();
-            modify(list);
+    public static void main(String[] args) {
+        List list = new MyOwnList();
+        modify(list);
 
-        }
+    }
 
-        private static void modify(List list) {
-            list.add(new Object());
-            list.get(0);
+    private static void modify(List list) {
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        System.out.println(list.get(2));
+        list.remove("3");
+        System.out.println(list.get(2));
 
         /*    Iterator i = new Iterator() {
                 @Override
@@ -28,6 +33,6 @@ public class Main {
                     return null;
                 }
             };*/
-        }
-
     }
+
+}
