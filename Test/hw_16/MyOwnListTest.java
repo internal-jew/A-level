@@ -5,14 +5,13 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.ListIterator;
 
 import static org.junit.Assert.*;
 
 public class MyOwnListTest {
-    MyOwnList<String> list;
-    Collection x;
+    private MyOwnList<String> list;
+    private Collection<String> x;
 
     @Before
     public void BeforeTests() {
@@ -22,7 +21,7 @@ public class MyOwnListTest {
         list.add("89");
 
         list.add("1");
-        x = new ArrayList();
+        x = new ArrayList<>();
         x.add("4");
         x.add("1");
         x.add("67");
@@ -135,7 +134,7 @@ public class MyOwnListTest {
 
     @Test
     public void listIterator() {
-        ListIterator li = list.listIterator();
+        ListIterator<String> li = list.listIterator();
         assertTrue(li.hasNext());
         list.clear();
         li = list.listIterator();
