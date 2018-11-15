@@ -6,8 +6,10 @@ public class NodeImplementation implements Node {
     private Node parent;
     private int value;
 
-    public NodeImplementation(int value)
-    {
+
+
+
+    public NodeImplementation(int value) {
         this.value = value;
     }
 
