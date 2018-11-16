@@ -8,7 +8,7 @@ import java.util.ListIterator;
 public class MyOwnList<T> implements List<T> {
     private Node<T> first;
     private Node<T> last;
-    //  private Node<T> prev;
+    //private Node<T> prev;
     int size;
 
     @Override
