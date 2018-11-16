@@ -1,10 +1,10 @@
 package hw_18.hw_18_Dijkstra;
 
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class Vertex {
     private String name;
-    private TreeMap<String, Integer> relation = new TreeMap<>();
+    private HashMap<String, Integer> relation = new HashMap<>();
     private boolean isUsedInDijkstra;
 
     private int dijkstraMark;
@@ -17,7 +17,7 @@ public class Vertex {
         isUsedInDijkstra = usedInDijkstra;
     }
 
-    TreeMap<String, Integer> getRelation() {
+    HashMap<String, Integer> getRelation() {
         return relation;
     }
 

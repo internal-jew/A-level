@@ -5,19 +5,21 @@ import java.util.Map;
 
 
 class Dijkstra {
+private Graph graph;
 
     int getDijkstra(Graph graph, String nameFrom, String nameTo) {
+     this.graph=graph;
         clearDijkstraMark(graph);
         Vertex startVertex = graph.getVertex(nameFrom);
         startVertex.setDijkstraMark(0);
         Vertex finishVertex = graph.getVertex(nameTo);
 
-        fillDijkstraToConnectVertex(graph, startVertex);
+        fillDijkstraToConnectVertex(startVertex);
 
         return finishVertex.getDijkstraMark();
     }
 
-    private void fillDijkstraToConnectVertex(Graph graph, Vertex vertex) {
+    private void fillDijkstraToConnectVertex(Vertex vertex) {
         vertex.setUsedInDijkstra(true);
         ArrayList<Vertex> nextVertexList = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : vertex.getRelation().entrySet()
@@ -48,7 +50,7 @@ class Dijkstra {
             }
         }
         while (nextVertexList.size() > 0) {
-            fillDijkstraToConnectVertex(graph, nextVertexList.get(0));
+            fillDijkstraToConnectVertex(nextVertexList.get(0));
             nextVertexList.remove(0);
         }
 
