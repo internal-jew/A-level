@@ -22,6 +22,10 @@ public class ResultBuilder {
     ResultBuilder() {
     }
 
+    public TreeMap<String, ArrayList<Bit>> getTableKey() {
+        return tableKey;
+    }
+
     public String getFilename() {
         return filename;
     }
@@ -35,13 +39,9 @@ public class ResultBuilder {
         try (FileInputStream inputStream = new FileInputStream(filename)
         ) {
             this.filename = filename;
-            int countOfBytes=0;
             while (inputStream.available() > 0) {
-                countOfBytes++;
                 originalDataFromFile.add(inputStream.read());
             }
-            System.out.println(countOfBytes);
-          //  System.exit(1);
         } catch (IOException e) {
             System.out.println("An error occurred with reading file.");
         }
