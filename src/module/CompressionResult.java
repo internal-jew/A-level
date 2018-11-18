@@ -6,9 +6,9 @@ import java.util.List;
 
 public class CompressionResult {
     private final String fileName;
-    private List<Character> bytes;
+    private List<Bit> bytes;
 
-   private CompressionResult(List<Character> bytes, String fileName) {
+   private CompressionResult(List<Bit> bytes, String fileName) {
         this.fileName = fileName;
         this.bytes = bytes;
     }
@@ -17,12 +17,16 @@ public class CompressionResult {
         return fileName;
     }
 
-    public List<Character> getBytes() {
+    public List<Bit> getBytes() {
         return bytes;
     }
 
     static ResultBuilder createBuilder() {
-        return new ResultBuilder();
+
+       return new ResultBuilder();
+    }
+    static CompressionResult createCompressionResult(ResultBuilder resultBuilder){
+       return new CompressionResult(resultBuilder.getBits(),resultBuilder.getFilename());
     }
 
 /*
@@ -43,50 +47,6 @@ public class CompressionResult {
 
 
  */
-public static class ResultBuilder {
-    private CompressionResult compressionResult;
-    private String filename="";
-    private ArrayList<Character> bits=new ArrayList<>();
 
-    // Defend
-    ResultBuilder() {
-    }
-
-
-
-    /*  ResultBuilder addBit(Bit bit) {
-      if(bit==Bit.ONE){
-          bits.add(1);
-      }
-      else {
-          bits.add(0);
-      }
-          return this;
-      }
-
-      ResultBuilder addBit(Integer bit) {
-
-              bits.add(bit);
-
-          return this;
-      }*/
-    ResultBuilder addBit(char bit) {
-
-        bits.add(bit);
-
-        return this;
-    }
-
-    ResultBuilder setFileName(String fileName) {
-        this.filename = fileName;
-        return this;
-    }
-    CompressionResult build(){
-
-        return compressionResult=new CompressionResult(bits,filename);
-
-        //   return null;
-    }
-}
 
 }

@@ -5,16 +5,17 @@ import java.util.PriorityQueue;
 import java.util.SortedSet;
 
 public class Node {
-    private  String value;
-    private  int weight;
+    private String value;
+    private int weight;
     private Node left;
     private Node right;
     private Node parent;
 
-    public void setParent(Node node){
-        this.parent=node;
+    public void setParent(Node node) {
+        this.parent = node;
     }
-    public Node getParent(){
+
+    public Node getParent() {
         return parent;
     }
 
@@ -24,16 +25,17 @@ public class Node {
         this.left = left;
         this.right = right;
     }
+
     public Node(String value, int weight) {
         this.value = value;
         this.weight = weight;
     }
 
-    public static Node getNodeByValue(ArrayList<Node> list, String value) throws NullPointerException{
-        for (Node node:list
-             ) {
-            if(node.value.equals(value)){
-              return node;
+    public static Node getNodeByValue(ArrayList<Node> list, String value) throws NullPointerException {
+        for (Node node : list
+        ) {
+            if (node.value.equals(value)) {
+                return node;
             }
 
         }
@@ -75,7 +77,7 @@ public class Node {
     @Override
     public String toString() {
         return "Node{" +
-                "value "+value+
+                "value " + value +
                 " weight=" + weight +
                 '}';
     }
