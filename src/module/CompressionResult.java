@@ -1,19 +1,20 @@
 package module;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
 
-public class CompressionResult {
+public class CompressionResult implements Serializable {
     private final String fileName;
     private final List<Bit> bytes;
-    private final TreeMap<String,ArrayList<Bit>>tableKey;
+    private final TreeMap<String, ArrayList<Bit>> tableKey;
 
-   private CompressionResult(List<Bit> bytes, TreeMap<String,ArrayList<Bit>>tableKey,String fileName) {
+    private CompressionResult(List<Bit> bytes, TreeMap<String, ArrayList<Bit>> tableKey, String fileName) {
         this.fileName = fileName;
         this.bytes = bytes;
-        this.tableKey=tableKey;
+        this.tableKey = tableKey;
     }
 
     public TreeMap<String, ArrayList<Bit>> getTableKey() {
@@ -30,10 +31,11 @@ public class CompressionResult {
 
     static ResultBuilder createBuilder() {
 
-       return new ResultBuilder();
+        return new ResultBuilder();
     }
-    static CompressionResult createCompressionResult(ResultBuilder resultBuilder){
-       return new CompressionResult(resultBuilder.getBits(), resultBuilder.getTableKey(),resultBuilder.getFilename());
+
+    static CompressionResult createCompressionResult(ResultBuilder resultBuilder) {
+        return new CompressionResult(resultBuilder.getBits(), resultBuilder.getTableKey(), resultBuilder.getFilename());
     }
 
 /*

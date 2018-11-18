@@ -1,8 +1,7 @@
 package module;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
 
 public class Utils {
     public static String getFileNameFromConsole() {
@@ -31,11 +30,39 @@ public class Utils {
                 fileOutputStream.write(convertToInteger(concreteByte));
 
             }
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
+        writeToFileTableKeys(compressionResult);
+
+    }
+
+    private static void writeToFileTableKeys(CompressionResult compressionResult) {
+
+        try (FileOutputStream fileOutputStream = new FileOutputStream
+                (changeResultFileName(compressionResult.getFileName()) + ".key");
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(compressionResult.getTableKey());
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public static void loadTableKeys(CompressionResult compressionResult) {
+        // TODO: 18.11.2018
+        try (FileInputStream fis = new FileInputStream(changeResultFileName(compressionResult.getFileName()) + ".key");
+             ObjectInputStream objectInputStream = new ObjectInputStream(fis)) {
+            Map<String, ArrayList<Bit>> newKeyTable = (Map<String, ArrayList<Bit>>) objectInputStream.readObject();
+            // List<Bit> newKeyTable=(List<Bit>) objectInputStream.readObject();
+            System.out.println(newKeyTable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private static int convertToInteger(Bit[] bits) {

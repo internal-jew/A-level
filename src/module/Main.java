@@ -3,6 +3,7 @@ package module;
 public class Main {
     public static void main(String[] args) {
 
+
         CompressionResult result = CompressionResult
                 .createBuilder()
                 .readDataFromFile(Utils.getFileNameFromConsole())
@@ -13,6 +14,5 @@ public class Main {
                 .build();
 
         Utils.writeToFile(result);
-
     }
 }
