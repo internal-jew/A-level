@@ -32,15 +32,20 @@ public class ResultBuilder {
 
 
     ResultBuilder readDataFromFile(String filename) {
-        try (FileInputStream inputStream = new FileInputStream("d:\\Test.rtf")
+        try (FileInputStream inputStream = new FileInputStream(filename)
         ) {
             this.filename = filename;
+            int countOfBytes=0;
             while (inputStream.available() > 0) {
+                countOfBytes++;
                 originalDataFromFile.add(inputStream.read());
             }
+            System.out.println(countOfBytes);
+          //  System.exit(1);
         } catch (IOException e) {
             System.out.println("An error occurred with reading file.");
         }
+
         return this;
     }
 

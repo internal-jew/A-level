@@ -1,18 +1,18 @@
 package module;
 
-import module.Utils.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
         CompressionResult result = CompressionResult
                 .createBuilder()
-                .readDataFromFile(Scanner.getFileNameFromConsole())
+                .readDataFromFile(Utils.getFileNameFromConsole())
                 .createFrequencyDictionary()
                 .createTreeNodes()
                 .createKeysTable()
                 .codingFile()
                 .build();
+
+        Utils.writeToFile(result);
         //try (FileInputStream inputStream = new FileInputStream(new BufferedReader(new InputStreamReader(System.in)).readLine())) {
    /*     try (FileInputStream inputStream = new FileInputStream("d:\\Test.rtf")
         ) {
@@ -59,12 +59,12 @@ public class Main {
                     dictionary.put(integer, 1);
                 }
                 */
- //   }
-    //    System.out.println(dictionary);
+        //   }
+        //    System.out.println(dictionary);
 
 
-    //  SortedList<Node> listNodes=new SortedList<>();
-    //listNodes.add()
+        //  SortedList<Node> listNodes=new SortedList<>();
+        //listNodes.add()
        /*     while (dictionary.values().size()>1){
 
             }
@@ -74,14 +74,14 @@ public class Main {
        dictionary.remove(en.getKey(),en.getValue());
             System.out.println(dictionary.ceilingEntry(0));
 */
-    //    listNodes.sort(Comparator.comparingInt(Node::getWeight));
+        //    listNodes.sort(Comparator.comparingInt(Node::getWeight));
 
-    //  ArrayList<Node> restoreListNode = new ArrayList<>();
-    //   restoreListNode.addAll(listNodes);
-    //         System.out.println(listNodes);
-    //         System.out.println(restoreListNode);
+        //  ArrayList<Node> restoreListNode = new ArrayList<>();
+        //   restoreListNode.addAll(listNodes);
+        //         System.out.println(listNodes);
+        //         System.out.println(restoreListNode);
 
-    // int countOfNodesInTree=listNodes.size()*2-1;
+        // int countOfNodesInTree=listNodes.size()*2-1;
      /*       Node node1, node2;
             while (listNodes.size() != 1) {
                 node1 = listNodes.remove(0);
@@ -94,7 +94,7 @@ public class Main {
             }
 */
 
-    //   System.out.println(listNodes);
+        //   System.out.println(listNodes);
 
         /*    TreeMap<String, String> tableKey = new TreeMap<>();
             //  StringBuilder code = new StringBuilder();
@@ -136,13 +136,13 @@ public class Main {
 
         }
     */
-    //  CompressionResult result = builder.setFileName("D:\\Test.ccc").build();
-    //builder.build()
+        //  CompressionResult result = builder.setFileName("D:\\Test.ccc").build();
+        //builder.build()
 
-    //          System.out.println(result.getBytes());
+        //          System.out.println(result.getBytes());
 
 
-    //Расшифровка
+        //Расшифровка
  /*   StringBuilder code = new StringBuilder();
     ArrayList<Integer> decoderList = new ArrayList<>();
             for(
@@ -174,34 +174,9 @@ public class Main {
       /*      FileOutputStream fileOutputStream=new FileOutputStream("d:\\test.ccc");
             byte[] buffer=result.getBytes().toArray();
             fileOutputStream.write(result.getBytes(),0,result.getBytes().size());
-            */
-
-
-    //     } catch (IOException e) {
-    //          System.out.println("Problem with reading file");
-    //     }
-
-
-    //      Bit[] bits = new Bit[]{ONE, ZERO, ONE};
-
-    //  Bit[]bits=doHaffmanLogic();
-
-
-    //       resultBuilder builder = createBuilder();
-       /* for (Bit bit : ) {
-            builder.addBit(bit);
-        }
-        builder.setFileName("uytuyt");
-        CompressionResult result = builder.build();
-        //  writeToFile(result);*/
+  }
 
 }
-
-
-    public static String getFileNameFromConsole() {
-        //  Scanner scanner=new Scanner(System.in);
-        //  return new Scanner(System.in).next();
-        return "d:\\Test.rtf";
+*/
     }
-
 }
