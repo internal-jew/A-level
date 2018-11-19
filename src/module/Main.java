@@ -29,6 +29,5 @@ public class Main {
             Utils.writeToFile(result);
         }
 
-        //  Utils
     }
 }
