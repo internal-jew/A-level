@@ -1,5 +1,6 @@
 package module;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -12,6 +13,11 @@ public class DecompressionResultBuilder {
 
 
     DecompressionResultBuilder(String filename) {
+        if(!new File(filename).exists()){
+            System.out.println("File do not exists.");
+            System.exit(1);
+        }
+
         if (filename.substring(filename.length() - 3).equals(".hf")) {
             this.filename = filename;
         } else {

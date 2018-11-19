@@ -11,6 +11,11 @@ public class Utils {
     }
 
     public static ArrayList<Integer> readDataFromFile(String filename) {
+        if(!new File(filename).exists()){
+            System.out.println("File do not exists.");
+            System.exit(1);
+        }
+
         ArrayList<Integer> resultArray = new ArrayList<>();
         try (FileInputStream inputStream = new FileInputStream(filename)
         ) {
