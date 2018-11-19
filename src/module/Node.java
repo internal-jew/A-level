@@ -1,8 +1,6 @@
 package module;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.SortedSet;
 
 public class Node {
     private String value;

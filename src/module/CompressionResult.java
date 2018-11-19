@@ -1,12 +1,11 @@
 package module;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
 
-public class CompressionResult implements Serializable {
+public class CompressionResult {
     private final String fileName;
     private final List<Bit> bytes;
     private final TreeMap<String, ArrayList<Bit>> tableKey;
@@ -29,33 +28,13 @@ public class CompressionResult implements Serializable {
         return bytes;
     }
 
-    static ResultBuilder createBuilder() {
+    static CompressionResultBuilder createBuilder() {
 
-        return new ResultBuilder();
+        return new CompressionResultBuilder();
     }
 
-    static CompressionResult createCompressionResult(ResultBuilder resultBuilder) {
+    static CompressionResult createCompressionResult(CompressionResultBuilder resultBuilder) {
         return new CompressionResult(resultBuilder.getBits(), resultBuilder.getTableKey(), resultBuilder.getFilename());
     }
-
-/*
-1. Node
-    value
-    weight
-    2 child
-2. Create dictionary частотный словарь
-    PriorityQueue
-3. Create table (a-0, b-01, c-00110
-4. Result (int[])
-5. Записать файл и таблицу
-
-
-1. Прочитать из файла результат и таблицу
-2. Востановить из результата Zero One
-3. Расжать
-
-
- */
-
 
 }

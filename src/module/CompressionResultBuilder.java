@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import static module.Bit.ONE;
 import static module.Bit.ZERO;
 
-public class ResultBuilder {
+public class CompressionResultBuilder {
     private String filename = "";
     private ArrayList<Bit> bits = new ArrayList<>();
     private List<Integer> originalDataFromFile = new ArrayList<>();
@@ -17,7 +17,7 @@ public class ResultBuilder {
     private TreeMap<String, ArrayList<Bit>> tableKey = new TreeMap<>();
 
 
-    ResultBuilder() {
+    CompressionResultBuilder() {
     }
 
     public TreeMap<String, ArrayList<Bit>> getTableKey() {
@@ -33,13 +33,13 @@ public class ResultBuilder {
     }
 
 
-    ResultBuilder readDataFromFile(String filename) {
+    CompressionResultBuilder readDataFromFile(String filename) {
         this.filename = filename;
         originalDataFromFile = Utils.readDataFromFile(filename);
         return this;
     }
 
-    ResultBuilder createFrequencyDictionary() {
+    CompressionResultBuilder createFrequencyDictionary() {
         for (Integer value : originalDataFromFile
         ) {
             if (Node.getNodeByValue(listOfNode, String.valueOf(value)) != null) {
@@ -53,7 +53,7 @@ public class ResultBuilder {
         return this;
     }
 
-    ResultBuilder createTreeNodes() {
+    CompressionResultBuilder createTreeNodes() {
         Node node1, node2;
         temporaryListOfNodes.addAll(listOfNode);
         while (temporaryListOfNodes.size() != 1) {
@@ -69,7 +69,7 @@ public class ResultBuilder {
         return this;
     }
 
-    ResultBuilder createKeysTable() {
+    CompressionResultBuilder createKeysTable() {
         for (Node node : listOfNode
         ) {
             if (node.getLeft() == null && node.getRight() == null) {
@@ -90,7 +90,7 @@ public class ResultBuilder {
         return this;
     }
 
-    ResultBuilder codingFile() {
+    CompressionResultBuilder codingFile() {
         for (Integer key : originalDataFromFile
         ) {
             ArrayList<Bit> code = tableKey.get(String.valueOf(key));
@@ -100,15 +100,8 @@ public class ResultBuilder {
         return this;
     }
 
-    /*  ResultBuilder setFileName(String fileName) {
-          this.filename = fileName;
-          return this;
-      }
-  */
     CompressionResult build() {
-
         return CompressionResult.createCompressionResult(this);
 
-        //   return null;
     }
 }

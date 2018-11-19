@@ -10,8 +10,8 @@ public class Utils {
         return scanner.next();
     }
 
-   public static ArrayList<Integer>readDataFromFile(String filename) {
-        ArrayList<Integer> resultArray=new ArrayList<>();
+    public static ArrayList<Integer> readDataFromFile(String filename) {
+        ArrayList<Integer> resultArray = new ArrayList<>();
         try (FileInputStream inputStream = new FileInputStream(filename)
         ) {
             while (inputStream.available() > 0) {
@@ -25,13 +25,12 @@ public class Utils {
     }
 
 
-
     public static void writeToFile(CompressionResult compressionResult) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(changeResultFileName(compressionResult.getFileName(),".ccc"))) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(compressionResult.getFileName() + ".hf")) {
             int countOfBits = 0;
 
             fileOutputStream.write(Integer.toBinaryString(compressionResult.getBytes().size()).getBytes());
-            fileOutputStream.write(String.valueOf('\\').getBytes());
+            fileOutputStream.write(String.valueOf('2').getBytes());
 
 
             Bit[] concreteByte = new Bit[8];
@@ -53,17 +52,32 @@ public class Utils {
             }
 
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    public static void writeToFile(DecompressionResult deCompressionResult) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(deCompressionResult.getFileName().substring(0, deCompressionResult.getFileName().length() - 3))) {
+            fileOutputStream.write(deCompressionResult.getDecompressedData());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File file = new File(deCompressionResult.getFileName());
+        file.delete();
+        file = new File(deCompressionResult.getFileName().substring(0, deCompressionResult.getFileName().length() - 7) + ".key");
+        file.delete();
+
+    }
+
+
     public static void writeToFileTableKeys(CompressionResult compressionResult) {
 
         try (FileOutputStream fileOutputStream = new FileOutputStream
-                (changeResultFileName(compressionResult.getFileName(),".key"));
+                (getFileNameWithoutExtension(compressionResult.getFileName()) + ".key");
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(compressionResult.getTableKey());
         } catch (IOException e) {
@@ -74,25 +88,81 @@ public class Utils {
     }
 
 
-    public static void loadTableKeys(CompressionResult compressionResult) {
-        // TODO: 18.11.2018
-        try (FileInputStream fis = new FileInputStream(changeResultFileName(compressionResult.getFileName(), ".key"));
+    public static Map<String, ArrayList<Bit>> loadTableKeys(String filename) {
+        Map<String, ArrayList<Bit>> keyTable = null;
+        try (FileInputStream fis = new FileInputStream(getFileNameWithoutExtension(filename) + ".key");
              ObjectInputStream objectInputStream = new ObjectInputStream(fis)) {
-            Map<String, ArrayList<Bit>> newKeyTable = (Map<String, ArrayList<Bit>>) objectInputStream.readObject();
-       //     System.out.println(newKeyTable);
+            keyTable = (Map<String, ArrayList<Bit>>) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return keyTable;
     }
 
-    private static int convertToInteger(Bit[] bits) {
-        int result = 0;
-        String binaryValue = convertBitToString(bits);
-        for (int i = 0; i < binaryValue.length(); i++) {
-            result += Math.pow(2, i) * (binaryValue.charAt(i) == '1' ? 1 : 0);
-        }
-        return result;
 
+    public static ArrayList<Bit> readDataFromCompressedFile(String filename) {
+        ArrayList<Bit> bits = new ArrayList<>();
+        ArrayList<Bit> countOfBits = new ArrayList<>();
+
+        try (FileInputStream inputStream = new FileInputStream(filename)
+        ) {
+            int tempInputStream = inputStream.read();
+
+            while (tempInputStream != 50) {
+                if (tempInputStream == 49) {
+                    countOfBits.add(Bit.ONE);
+                } else {
+                    countOfBits.add(Bit.ZERO);
+                }
+                tempInputStream = inputStream.read();
+            }
+            Bit[] count = new Bit[countOfBits.size()];
+            int i = 0;
+            for (Bit bit : countOfBits
+            ) {
+                count[i] = bit;
+                i++;
+            }
+            //  count.
+            int lengthOfData = convertToInteger(count);
+
+
+            while (inputStream.available() > 0) {
+                String bin = Integer.toBinaryString(inputStream.read());
+                while (bin.length() < 8) {
+                    bin = "0" + bin;
+                }
+                for (char character : bin.toCharArray()
+                ) {
+                    lengthOfData -= 1;
+
+                    if (character == 49) {
+                        bits.add(Bit.ONE);
+                    } else {
+                        bits.add(Bit.ZERO);
+                    }
+                }
+            }
+            while (lengthOfData != 0) {
+                bits.remove(bits.size() - 1);
+                lengthOfData += 1;
+            }
+
+
+            System.out.println(bits.size());
+
+        } catch (IOException e) {
+            System.out.println("An error occurred with reading file.");
+        }
+
+        return bits;
+    }
+
+
+    private static int convertToInteger(Bit[] bits) {
+        // int result = 0;
+        String binaryValue = convertBitToString(bits);
+        return Integer.parseInt(binaryValue, 2);
     }
 
     private static String convertBitToString(Bit[] bits) {
@@ -108,16 +178,16 @@ public class Utils {
         return stringBuilder.toString();
     }
 
-    private static String changeResultFileName(String originalFileName,String changeChars) {
+    private static String getFileNameWithoutExtension(String originalFileName) {
         String result;
         if (originalFileName.contains(".")) {
             int indexOfSymbol = originalFileName.indexOf('.');
-            result = originalFileName.substring(0, indexOfSymbol) + changeChars;
+            result = originalFileName.substring(0, indexOfSymbol);
         } else {
-            result = originalFileName + changeChars;
+            result = originalFileName;
         }
         if (new File(result).exists()) {
-            System.out.println("File with name: "+result +" has been overwrite." );
+            System.out.println("File with name: " + result + " has been overwrite.");
         }
         return result;
     }

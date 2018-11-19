@@ -18,8 +18,17 @@ public class Main {
             Utils.writeToFileTableKeys(result);
 
 
+        } else {
+            DecompressionResult result = DecompressionResult
+                    .createBuilder(Utils.getDataFromConsole("Enter absolute fileName that will be decompress: "))
+                    .loadTableKeys()
+                    .readDataFromCompressedFile()
+                    .restoreOriginalData()
+                    .build();
+
+            Utils.writeToFile(result);
         }
 
-
+      //  Utils
     }
 }
