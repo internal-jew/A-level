@@ -1,7 +1,5 @@
 package module;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -36,16 +34,8 @@ public class ResultBuilder {
 
 
     ResultBuilder readDataFromFile(String filename) {
-        try (FileInputStream inputStream = new FileInputStream(filename)
-        ) {
-            this.filename = filename;
-            while (inputStream.available() > 0) {
-                originalDataFromFile.add(inputStream.read());
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred with reading file.");
-        }
-
+        this.filename = filename;
+        originalDataFromFile = Utils.readDataFromFile(filename);
         return this;
     }
 

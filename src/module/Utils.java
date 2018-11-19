@@ -4,14 +4,36 @@ import java.io.*;
 import java.util.*;
 
 public class Utils {
-    public static String getFileNameFromConsole() {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
+    public static String getDataFromConsole(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
 
+   public static ArrayList<Integer>readDataFromFile(String filename) {
+        ArrayList<Integer> resultArray=new ArrayList<>();
+        try (FileInputStream inputStream = new FileInputStream(filename)
+        ) {
+            while (inputStream.available() > 0) {
+                resultArray.add(inputStream.read());
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred with reading file.");
+        }
+
+        return resultArray;
+    }
+
+
+
     public static void writeToFile(CompressionResult compressionResult) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(changeResultFileName(compressionResult.getFileName()))) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(changeResultFileName(compressionResult.getFileName(),".ccc"))) {
             int countOfBits = 0;
+
+            fileOutputStream.write(Integer.toBinaryString(compressionResult.getBytes().size()).getBytes());
+            fileOutputStream.write(String.valueOf('\\').getBytes());
+
+
             Bit[] concreteByte = new Bit[8];
             for (Bit bit : compressionResult.getBytes()
             ) {
@@ -28,20 +50,20 @@ public class Utils {
                     countOfBits++;
                 }
                 fileOutputStream.write(convertToInteger(concreteByte));
-
             }
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        writeToFileTableKeys(compressionResult);
-
     }
 
-    private static void writeToFileTableKeys(CompressionResult compressionResult) {
+    public static void writeToFileTableKeys(CompressionResult compressionResult) {
 
         try (FileOutputStream fileOutputStream = new FileOutputStream
-                (changeResultFileName(compressionResult.getFileName()) + ".key");
+                (changeResultFileName(compressionResult.getFileName(),".key"));
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(compressionResult.getTableKey());
         } catch (IOException e) {
@@ -51,16 +73,14 @@ public class Utils {
 
     }
 
+
     public static void loadTableKeys(CompressionResult compressionResult) {
         // TODO: 18.11.2018
-        try (FileInputStream fis = new FileInputStream(changeResultFileName(compressionResult.getFileName()) + ".key");
+        try (FileInputStream fis = new FileInputStream(changeResultFileName(compressionResult.getFileName(), ".key"));
              ObjectInputStream objectInputStream = new ObjectInputStream(fis)) {
             Map<String, ArrayList<Bit>> newKeyTable = (Map<String, ArrayList<Bit>>) objectInputStream.readObject();
-            // List<Bit> newKeyTable=(List<Bit>) objectInputStream.readObject();
-            System.out.println(newKeyTable);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+       //     System.out.println(newKeyTable);
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -88,16 +108,16 @@ public class Utils {
         return stringBuilder.toString();
     }
 
-    private static String changeResultFileName(String originalFileName) {
-        String result = "";
+    private static String changeResultFileName(String originalFileName,String changeChars) {
+        String result;
         if (originalFileName.contains(".")) {
             int indexOfSymbol = originalFileName.indexOf('.');
-            result = originalFileName.substring(0, indexOfSymbol) + ".ccc";
+            result = originalFileName.substring(0, indexOfSymbol) + changeChars;
         } else {
-            result = originalFileName + ".ccc";
+            result = originalFileName + changeChars;
         }
         if (new File(result).exists()) {
-            System.out.println("Attention! File has been overloaded!");
+            System.out.println("File with name: "+result +" has been overwrite." );
         }
         return result;
     }

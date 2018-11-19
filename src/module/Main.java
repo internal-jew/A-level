@@ -4,15 +4,22 @@ public class Main {
     public static void main(String[] args) {
 
 
-        CompressionResult result = CompressionResult
-                .createBuilder()
-                .readDataFromFile(Utils.getFileNameFromConsole())
-                .createFrequencyDictionary()
-                .createTreeNodes()
-                .createKeysTable()
-                .codingFile()
-                .build();
+        if (Utils.getDataFromConsole("Press '1' to compress file or '0' to decompress").equals("1")) {
+            CompressionResult result = CompressionResult
+                    .createBuilder()
+                    .readDataFromFile(Utils.getDataFromConsole("Enter absolute fileName that will be compress: "))
+                    .createFrequencyDictionary()
+                    .createTreeNodes()
+                    .createKeysTable()
+                    .codingFile()
+                    .build();
 
-        Utils.writeToFile(result);
+            Utils.writeToFile(result);
+            Utils.writeToFileTableKeys(result);
+
+
+        }
+
+
     }
 }
