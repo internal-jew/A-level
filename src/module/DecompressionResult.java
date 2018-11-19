@@ -8,7 +8,7 @@ public class DecompressionResult {
     private final List<Bit> bytes;
     private final List<Integer> decompressedData;
 
-    private DecompressionResult(List<Bit> bytes,  ArrayList<Integer> decompressedData, String fileName) {
+    private DecompressionResult(List<Bit> bytes, ArrayList<Integer> decompressedData, String fileName) {
         this.fileName = fileName;
         this.bytes = bytes;
         this.decompressedData = decompressedData;
@@ -33,11 +33,11 @@ public class DecompressionResult {
     }
 
     public byte[] getDecompressedData() {
-        byte[]result=new byte[decompressedData.size()];
-        int i=0;
-        for (int number:decompressedData
-             ) {
-            result[i]=(byte)number;
+        byte[] result = new byte[decompressedData.size()];
+        int i = 0;
+        for (int number : decompressedData
+        ) {
+            result[i] = (byte) number;
             i++;
         }
 

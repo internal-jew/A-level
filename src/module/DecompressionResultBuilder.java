@@ -12,12 +12,11 @@ public class DecompressionResultBuilder {
 
 
     DecompressionResultBuilder(String filename) {
-       if(filename.substring(filename.length()-3).equals(".hf")){
-           this.filename = filename;
-       }
-       else{
-           System.out.println("File is not compressed.");
-       }
+        if (filename.substring(filename.length() - 3).equals(".hf")) {
+            this.filename = filename;
+        } else {
+            System.out.println("File is not compressed.");
+        }
 
     }
 

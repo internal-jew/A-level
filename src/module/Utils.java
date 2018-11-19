@@ -123,7 +123,6 @@ public class Utils {
                 count[i] = bit;
                 i++;
             }
-            //  count.
             int lengthOfData = convertToInteger(count);
 
 
@@ -147,9 +146,6 @@ public class Utils {
                 bits.remove(bits.size() - 1);
                 lengthOfData += 1;
             }
-
-
-            System.out.println(bits.size());
 
         } catch (IOException e) {
             System.out.println("An error occurred with reading file.");
